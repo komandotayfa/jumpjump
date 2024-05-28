@@ -1,7 +1,27 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2i36kakqxoq1"]
+[gd_scene load_steps=14 format=3 uid="uid://b2i36kakqxoq1"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_b52qv"]
 [ext_resource type="Texture2D" uid="uid://cp6lm8llmfxwa" path="res://assets/sprites/knight.png" id="1_uoa5h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fb5w2"]
+atlas = ExtResource("1_uoa5h")
+region = Rect2(64, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_an650"]
+atlas = ExtResource("1_uoa5h")
+region = Rect2(0, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4nbb6"]
+atlas = ExtResource("1_uoa5h")
+region = Rect2(32, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1n2n4"]
+atlas = ExtResource("1_uoa5h")
+region = Rect2(64, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6yo8"]
+atlas = ExtResource("1_uoa5h")
+region = Rect2(96, 224, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b2xll"]
 atlas = ExtResource("1_uoa5h")
@@ -21,6 +41,26 @@ region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_x7q5w"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fb5w2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_an650")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4nbb6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1n2n4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v6yo8")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_b2xll")
@@ -50,9 +90,9 @@ script = ExtResource("1_b52qv")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_x7q5w")
-animation = &"idle"
+animation = &"dead"
 autoplay = "idle"
-frame_progress = 0.472244
+frame_progress = 0.280975
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -6.5)

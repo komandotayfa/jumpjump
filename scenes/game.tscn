@@ -1,10 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://isl75jjdsw7y"]
+[gd_scene load_steps=24 format=3 uid="uid://isl75jjdsw7y"]
 
+[ext_resource type="Script" path="res://scripts/GameManager.gd" id="1_57r24"]
 [ext_resource type="PackedScene" uid="uid://b2i36kakqxoq1" path="res://scenes/player.tscn" id="1_btkg5"]
 [ext_resource type="Texture2D" uid="uid://bm3rym6lmbbif" path="res://assets/sprites/world_tileset.png" id="2_m4mlu"]
 [ext_resource type="PackedScene" uid="uid://dgbf5tfm4mahy" path="res://scenes/platform.tscn" id="3_y5ayv"]
 [ext_resource type="PackedScene" uid="uid://car13mjiclyd8" path="res://scenes/coin.tscn" id="4_l3dkn"]
 [ext_resource type="PackedScene" uid="uid://dmsa77qagppav" path="res://scenes/killzone.tscn" id="5_4lvfj"]
+[ext_resource type="PackedScene" uid="uid://uq3vljgc0pdx" path="res://scenes/green_slime.tscn" id="6_yhdx8"]
+[ext_resource type="Script" path="res://scripts/textureflip.gd" id="7_7buqo"]
+[ext_resource type="PackedScene" uid="uid://chhlprx22sfvr" path="res://scenes/winzone.tscn" id="8_uwqsw"]
+[ext_resource type="FontFile" uid="uid://cm62cqif74mvg" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="10_aqqb4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hvsci"]
 texture = ExtResource("2_m4mlu")
@@ -413,6 +418,26 @@ sources/0 = SubResource("TileSetAtlasSource_hvsci")
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_bmk3v"]
 distance = -81.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gereh"]
+size = Vector2(16, 15)
+
+[sub_resource type="Animation" id="Animation_q1e14"]
+length = 2.0
+loop_mode = 2
+step = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(194, -42), Vector2(287, -42)]
+}
+
 [sub_resource type="Animation" id="Animation_yvaba"]
 resource_name = "move"
 length = 2.00001
@@ -431,8 +456,16 @@ tracks/0/keys = {
 "values": [Vector2(194, -42), Vector2(287, -42)]
 }
 
-[sub_resource type="Animation" id="Animation_q1e14"]
-length = 0.001
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wu2t4"]
+_data = {
+"RESET": SubResource("Animation_q1e14"),
+"move": SubResource("Animation_yvaba")
+}
+
+[sub_resource type="Animation" id="Animation_kb7so"]
+length = 2.0
+loop_mode = 2
+step = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -440,16 +473,10 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(194, -42)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wu2t4"]
-_data = {
-"RESET": SubResource("Animation_q1e14"),
-"move": SubResource("Animation_yvaba")
+"values": [Vector2(784, -92), Vector2(905, -92)]
 }
 
 [sub_resource type="Animation" id="Animation_pbirt"]
@@ -470,7 +497,13 @@ tracks/0/keys = {
 "values": [Vector2(784, -92), Vector2(904, -92)]
 }
 
-[sub_resource type="Animation" id="Animation_kb7so"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fddi4"]
+_data = {
+"RESET": SubResource("Animation_kb7so"),
+"move": SubResource("Animation_pbirt")
+}
+
+[sub_resource type="Animation" id="Animation_r3bxt"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -482,16 +515,51 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(784, -92)]
+"values": [Vector2(472, -108)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fddi4"]
+[sub_resource type="Animation" id="Animation_i4fh7"]
+resource_name = "patrol"
+length = 2.0
+loop_mode = 2
+step = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(472, -108), Vector2(520, -108)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iy05a"]
 _data = {
-"RESET": SubResource("Animation_kb7so"),
-"move": SubResource("Animation_pbirt")
+"RESET": SubResource("Animation_r3bxt"),
+"patrol": SubResource("Animation_i4fh7")
 }
 
 [node name="Game" type="Node2D"]
+
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_57r24")
+
+[node name="scorelabel" type="Label" parent="GameManager"]
+offset_left = 1362.0
+offset_top = -109.0
+offset_right = 1438.0
+offset_bottom = -53.0
+theme_override_colors/font_color = Color(1, 0.698039, 0, 1)
+theme_override_fonts/font = ExtResource("10_aqqb4")
+theme_override_font_sizes/font_size = 8
+text = "You win with X coin nerd"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_iavbg")
@@ -519,6 +587,12 @@ position = Vector2(-4, -35)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
 shape = SubResource("WorldBoundaryShape2D_bmk3v")
 
+[node name="winzone" parent="." instance=ExtResource("8_uwqsw")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="winzone"]
+position = Vector2(1400, -39.5)
+shape = SubResource("RectangleShape2D_gereh")
+
 [node name="coins" type="Node" parent="."]
 
 [node name="coin" parent="coins" instance=ExtResource("4_l3dkn")]
@@ -539,6 +613,9 @@ position = Vector2(847, -104)
 [node name="coin6" parent="coins" instance=ExtResource("4_l3dkn")]
 position = Vector2(1079, -119)
 
+[node name="coin7" parent="coins" instance=ExtResource("4_l3dkn")]
+position = Vector2(1304, -91)
+
 [node name="platforms" type="Node" parent="."]
 
 [node name="platform" parent="platforms" instance=ExtResource("3_y5ayv")]
@@ -558,3 +635,24 @@ libraries = {
 "": SubResource("AnimationLibrary_fddi4")
 }
 autoplay = "move"
+
+[node name="platform3" parent="platforms" instance=ExtResource("3_y5ayv")]
+position = Vector2(1304, -51)
+
+[node name="green_slime" parent="." instance=ExtResource("6_yhdx8")]
+position = Vector2(472, -108)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="green_slime"]
+libraries = {
+"": SubResource("AnimationLibrary_iy05a")
+}
+autoplay = "patrol"
+script = ExtResource("7_7buqo")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -4.0
+offset_top = -85.0
+offset_right = 260.0
+offset_bottom = -69.0
+theme_override_fonts/font = ExtResource("10_aqqb4")
+text = "HELLO LITTLE BITCH"
