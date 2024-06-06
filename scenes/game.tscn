@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://isl75jjdsw7y"]
+[gd_scene load_steps=23 format=3 uid="uid://isl75jjdsw7y"]
 
 [ext_resource type="Script" path="res://scripts/GameManager.gd" id="1_57r24"]
 [ext_resource type="PackedScene" uid="uid://b2i36kakqxoq1" path="res://scenes/player.tscn" id="1_btkg5"]
@@ -6,11 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://dgbf5tfm4mahy" path="res://scenes/platform.tscn" id="3_y5ayv"]
 [ext_resource type="PackedScene" uid="uid://car13mjiclyd8" path="res://scenes/coin.tscn" id="4_l3dkn"]
 [ext_resource type="PackedScene" uid="uid://dmsa77qagppav" path="res://scenes/killzone.tscn" id="5_4lvfj"]
-[ext_resource type="PackedScene" uid="uid://uq3vljgc0pdx" path="res://scenes/green_slime.tscn" id="6_yhdx8"]
-[ext_resource type="Script" path="res://scripts/textureflip.gd" id="7_7buqo"]
-[ext_resource type="PackedScene" uid="uid://chhlprx22sfvr" path="res://scenes/winzone.tscn" id="8_uwqsw"]
+[ext_resource type="Script" path="res://scripts/teleporter_level_1.gd" id="9_fikql"]
+[ext_resource type="Script" path="res://scripts/level_1_death.gd" id="10_2i626"]
 [ext_resource type="FontFile" uid="uid://cm62cqif74mvg" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="10_aqqb4"]
-[ext_resource type="Script" path="res://scripts/teleporter_winscreen.gd" id="11_8cnv7"]
+[ext_resource type="Script" path="res://scripts/teleporter_main_menu.gd" id="11_8cnv7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hvsci"]
 texture = ExtResource("2_m4mlu")
@@ -416,11 +415,8 @@ texture = ExtResource("2_m4mlu")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_hvsci")
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_bmk3v"]
-distance = -81.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gereh"]
-size = Vector2(48, 15)
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rindm"]
+distance = -91.0
 
 [sub_resource type="Animation" id="Animation_q1e14"]
 length = 2.0
@@ -504,47 +500,15 @@ _data = {
 "move": SubResource("Animation_pbirt")
 }
 
-[sub_resource type="Animation" id="Animation_r3bxt"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(472, -108)]
-}
-
-[sub_resource type="Animation" id="Animation_i4fh7"]
-resource_name = "patrol"
-length = 2.0
-loop_mode = 2
-step = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(472, -108), Vector2(520, -108)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_iy05a"]
-_data = {
-"RESET": SubResource("Animation_r3bxt"),
-"patrol": SubResource("Animation_i4fh7")
-}
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l31h6"]
-size = Vector2(58, 20)
+size = Vector2(19, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eq343"]
+size = Vector2(12, 15)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_m2eca"]
+a = Vector2(-192, 0)
+b = Vector2(1798, 0)
 
 [node name="Game" type="Node2D"]
 
@@ -560,7 +524,7 @@ offset_bottom = -36.0
 theme_override_colors/font_color = Color(1, 0.698039, 0, 1)
 theme_override_fonts/font = ExtResource("10_aqqb4")
 theme_override_font_sizes/font_size = 8
-text = "You win with X coin nerd"
+text = "You collected X coins!"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
@@ -573,10 +537,10 @@ layer_0/tile_data = PackedInt32Array(-1966107, 0, 9, -1900571, 0, 9, -1835035, 0
 layer_1/name = "2.layer"
 layer_1/tile_data = PackedInt32Array(-327828, 0, 7, -327827, 65536, 7, -327826, 65536, 8, -327825, 0, 8, -327824, 65536, 8, -327823, 65536, 7, -327822, 0, 7)
 layer_2/name = "mid"
-layer_2/tile_data = PackedInt32Array(-262125, 0, 0, -327660, 0, 0, -262124, 0, 1, -393187, 0, 0, -393186, 0, 0, -393185, 0, 0, -393184, 0, 0, -327646, 0, 0, -262109, 0, 0, -131033, 0, 0, -131031, 0, 0, -458722, 65536, 6, -196571, 0, 0, -262110, 0, 1, -196565, 0, 0, -327634, 0, 0, -393169, 0, 0, -262099, 0, 0, -262098, 0, 1, -131014, 0, 0, -131013, 0, 0, -131012, 0, 0, -196549, 65536, 6, -196546, 0, 0, -262081, 0, 0, -327616, 0, 0, -393151, 0, 0, -458685, 0, 0, -393148, 0, 0, -327610, 0, 0, -196537, 0, 0, -130999, 0, 0, -196545, 0, 1, -262080, 0, 1, -327615, 0, 1, -393149, 0, 1, -327645, 65536, 6, -393170, 65536, 6, -458687, 65536, 6, -262073, 65536, 6, -130997, 0, 0, -130996, 589824, 0, -130995, 655360, 0, -130994, 655360, 0, -130993, 655360, 0, -130992, 720896, 0, -130991, 0, 0, -196533, 65536, 5, -196527, 65536, 7, -393194, 0, 0, -458728, 0, 0, -393190, 0, 0, -196611, 0, 3, -131075, 0, 5, -65539, 0, 0, -65538, 0, 0, -131073, 65536, 6, -65537, 0, 0, -131072, 0, 0, -196606, 0, 0, -196605, 0, 0, -262140, 65536, 6, -196604, 0, 0, -131066, 0, 0, -131065, 0, 0, -196600, 65536, 6, -131064, 0, 0, -131063, 0, 0, -131062, 0, 0, -327633, 0, 1, -196598, 524288, 8, -458720, 524288, 8, -327617, 524288, 8, -327829, 131072, 4, -196757, 196608, 7, -131221, 196608, 7, -65685, 196608, 7, -149, 0, 0, -327828, 589824, 2, -262292, 393216, 3, -196756, 393216, 4, -131220, 393216, 4, -65684, 393216, 5, -148, 0, 0, -327827, 655360, 2, -262291, 524288, 5, -196755, 0, 3, -131219, 0, 4, -65683, 0, 5, -147, 0, 0, -327826, 655360, 2, -196754, 65536, 6, -131218, 327680, 3, -65682, 327680, 5, -146, 0, 0, -327825, 655360, 2, -65681, 262144, 8, -145, 0, 0, -327824, 655360, 2, -196752, 65536, 6, -131216, 327680, 3, -65680, 327680, 5, -144, 0, 0, -327823, 655360, 2, -262287, 524288, 5, -196751, 0, 3, -131215, 0, 4, -65679, 0, 5, -143, 0, 0, -327822, 720896, 2, -262286, 393216, 3, -196750, 393216, 4, -131214, 393216, 4, -65678, 393216, 5, -142, 0, 0, -327821, 131072, 4, -196749, 196608, 8, -131213, 196608, 8, -65677, 196608, 8, -141, 0, 0, -65676, 524288, 3, -140, 0, 0, -65675, 589824, 3, -139, 0, 0, -65674, 589824, 3, -138, 0, 0, -65673, 589824, 3, -137, 0, 0, -131208, 0, 0, -65672, 0, 1, -136, 0, 1, -130978, 0, 0, -130977, 0, 0, -196516, 0, 0, -393127, 0, 0, -458662, 0, 0, -524196, 0, 0, -458658, 0, 0, -524192, 0, 0, -458654, 0, 0, -524188, 0, 0, -524187, 0, 0, -524186, 0, 0, -524185, 0, 0, -524184, 0, 0)
+layer_2/tile_data = PackedInt32Array(-262125, 0, 0, -327660, 0, 0, -262124, 0, 1, -393187, 0, 0, -393186, 0, 0, -393185, 0, 0, -393184, 0, 0, -327646, 0, 0, -262109, 0, 0, -131033, 0, 0, -131031, 0, 0, -458722, 65536, 6, -196571, 0, 0, -262110, 0, 1, -196565, 0, 0, -327634, 0, 0, -393169, 0, 0, -262099, 0, 0, -262098, 0, 1, -131014, 0, 0, -131013, 0, 0, -131012, 0, 0, -196549, 65536, 6, -196546, 0, 0, -262081, 0, 0, -327616, 0, 0, -393151, 0, 0, -458685, 0, 0, -393148, 0, 0, -327610, 0, 0, -196537, 0, 0, -130999, 0, 0, -196545, 0, 1, -262080, 0, 1, -327615, 0, 1, -393149, 0, 1, -327645, 65536, 6, -393170, 65536, 6, -458687, 65536, 6, -262073, 65536, 6, -130997, 0, 0, -130996, 589824, 0, -130995, 655360, 0, -130994, 655360, 0, -130993, 655360, 0, -130992, 720896, 0, -130991, 0, 0, -196533, 65536, 5, -196527, 65536, 7, -393194, 0, 0, -458728, 0, 0, -393190, 0, 0, -196611, 0, 3, -131075, 0, 5, -65539, 0, 0, -65538, 0, 0, -131073, 65536, 6, -65537, 0, 0, -131072, 0, 0, -196606, 0, 0, -196605, 0, 0, -262140, 65536, 6, -196604, 0, 0, -131066, 0, 0, -131065, 0, 0, -196600, 65536, 6, -131064, 0, 0, -131063, 0, 0, -131062, 0, 0, -327633, 0, 1, -196598, 524288, 8, -458720, 524288, 8, -327617, 524288, 8, -327829, 131072, 4, -196757, 196608, 7, -131221, 196608, 7, -65685, 196608, 7, -149, 0, 0, -327828, 589824, 2, -262292, 393216, 3, -196756, 393216, 4, -131220, 393216, 4, -65684, 393216, 5, -148, 0, 0, -327827, 655360, 2, -262291, 524288, 5, -196755, 0, 3, -131219, 0, 4, -65683, 0, 5, -147, 0, 0, -327826, 655360, 2, -196754, 65536, 6, -131218, 327680, 3, -65682, 327680, 5, -146, 0, 0, -327825, 655360, 2, -65681, 262144, 8, -145, 0, 0, -327824, 655360, 2, -196752, 65536, 6, -131216, 327680, 3, -65680, 327680, 5, -144, 0, 0, -327823, 655360, 2, -262287, 524288, 5, -196751, 0, 3, -131215, 0, 4, -65679, 0, 5, -143, 0, 0, -327822, 720896, 2, -262286, 393216, 3, -196750, 393216, 4, -131214, 393216, 4, -65678, 393216, 5, -142, 0, 0, -327821, 131072, 4, -196749, 196608, 8, -131213, 196608, 8, -65677, 196608, 8, -141, 0, 0, -130978, 0, 0, -130977, 0, 0, -196516, 0, 0, -393127, 0, 0, -458662, 0, 0, -524196, 0, 0, -458658, 0, 0, -524192, 0, 0, -458654, 0, 0, -524188, 0, 0, -524187, 0, 0, -524186, 0, 0, -524185, 0, 0, -524184, 0, 0, -140, 0, 0, -139, 0, 0, -138, 0, 0, -137, 0, 0, -150, 0, 0, -151, 0, 0, -152, 0, 0, -153, 0, 0, -154, 0, 0, -155, 0, 0, -158, 0, 0, -136, 589824, 0, -135, 655360, 0, -134, 720896, 0, -133, 0, 0, -132, 0, 0, -131, 0, 0, -130, 589824, 0, -129, 655360, 0, -128, 720896, 0, -127, 0, 0, -126, 0, 0, -125, 0, 0, -65668, 524288, 3, -65662, 524288, 3, -65691, 524288, 3, -65694, 524288, 3)
 
 [node name="player" parent="." instance=ExtResource("1_btkg5")]
-position = Vector2(-22, -36)
+position = Vector2(-2310, -18)
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 position = Vector2(0, -6)
@@ -589,13 +553,8 @@ position_smoothing_enabled = true
 position = Vector2(-4, -35)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
-shape = SubResource("WorldBoundaryShape2D_bmk3v")
-
-[node name="winzone" parent="." instance=ExtResource("8_uwqsw")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="winzone"]
-position = Vector2(-2200, -22)
-shape = SubResource("RectangleShape2D_gereh")
+position = Vector2(-2476.5, 9)
+shape = SubResource("WorldBoundaryShape2D_rindm")
 
 [node name="coins" type="Node" parent="."]
 
@@ -658,53 +617,70 @@ position = Vector2(1393, -72)
 [node name="platform6" parent="platforms" instance=ExtResource("3_y5ayv")]
 position = Vector2(1432, -49)
 
-[node name="green_slime" parent="." instance=ExtResource("6_yhdx8")]
-position = Vector2(472, -108)
+[node name="platform7" parent="platforms" instance=ExtResource("3_y5ayv")]
+position = Vector2(-2104, -35)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="green_slime"]
-libraries = {
-"": SubResource("AnimationLibrary_iy05a")
-}
-autoplay = "patrol"
-script = ExtResource("7_7buqo")
+[node name="platform8" parent="platforms" instance=ExtResource("3_y5ayv")]
+position = Vector2(-2008, -35)
 
 [node name="labels" type="Node" parent="."]
 
-[node name="Label2" type="Label" parent="labels"]
-offset_left = -150.0
-offset_top = -85.0
-offset_right = 190.0
-offset_bottom = -69.0
-theme_override_fonts/font = ExtResource("10_aqqb4")
-text = "GO RIGHT TO FIND NOTHING"
-
-[node name="Label" type="Label" parent="labels"]
-offset_left = -112.0
-offset_top = -104.0
-offset_right = 156.0
-offset_bottom = -88.0
-theme_override_fonts/font = ExtResource("10_aqqb4")
-text = "HELLO BRAVE KNIGHT"
-
 [node name="Label3" type="Label" parent="labels"]
-offset_left = -2224.0
-offset_top = -40.0
-offset_right = -2177.0
-offset_bottom = -32.0
+offset_left = -2525.0
+offset_top = -45.0
+offset_right = -2463.0
+offset_bottom = -37.0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_fonts/font = ExtResource("10_aqqb4")
 theme_override_font_sizes/font_size = 8
-text = "Retry?"
+text = "Restart?"
+
+[node name="Label4" type="Label" parent="labels"]
+offset_left = -2112.0
+offset_top = -68.0
+offset_right = -2096.0
+offset_bottom = -52.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("10_aqqb4")
+theme_override_font_sizes/font_size = 16
+text = "1"
+
+[node name="Label5" type="Label" parent="labels"]
+offset_left = -2016.0
+offset_top = -68.0
+offset_right = -2000.0
+offset_bottom = -52.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("10_aqqb4")
+theme_override_font_sizes/font_size = 16
+text = "2"
 
 [node name="teleporters" type="Node" parent="."]
 
-[node name="teleporter_winscreen" type="Area2D" parent="teleporters"]
+[node name="teleporter_main_menu" type="Area2D" parent="teleporters"]
 position = Vector2(1387, -42)
 collision_mask = 2
 script = ExtResource("11_8cnv7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="teleporters/teleporter_winscreen"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="teleporters/teleporter_main_menu"]
 position = Vector2(253, -98)
 shape = SubResource("RectangleShape2D_l31h6")
 
-[connection signal="body_entered" from="teleporters/teleporter_winscreen" to="teleporters/teleporter_winscreen" method="_on_body_entered"]
+[node name="teleporter_level_1" type="Area2D" parent="teleporters"]
+collision_mask = 2
+script = ExtResource("9_fikql")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="teleporters/teleporter_level_1"]
+position = Vector2(-2104, -61.5)
+shape = SubResource("RectangleShape2D_eq343")
+
+[node name="level_1_death" type="Area2D" parent="teleporters"]
+collision_mask = 2
+script = ExtResource("10_2i626")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="teleporters/level_1_death"]
+shape = SubResource("SegmentShape2D_m2eca")
+
+[connection signal="body_entered" from="teleporters/teleporter_main_menu" to="teleporters/teleporter_main_menu" method="_on_body_entered"]
+[connection signal="body_entered" from="teleporters/teleporter_level_1" to="teleporters/teleporter_level_1" method="_on_body_entered"]
+[connection signal="body_entered" from="teleporters/level_1_death" to="teleporters/level_1_death" method="_on_body_entered"]
