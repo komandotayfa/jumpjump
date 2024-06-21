@@ -7,6 +7,9 @@ const JUMP_VELOCITY = -200.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var animated_sprite = $AnimatedSprite2D
 
+# Variable to keep track of mute state
+var is_muted = false
+
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -21,6 +24,9 @@ func _physics_process(delta):
 
 	if Input.is_action_pressed("menu"):
 		position = Vector2(-2327,-22)
+
+	if Input.is_action_pressed("mute"):
+		toggle_mute()
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -45,3 +51,13 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
 	move_and_slide()
+
+func toggle_mute():
+	# Toggle the mute state
+	is_muted = !is_muted
+
+	# Update the global volume
+	if is_muted:
+		AudioServer.set_bus_mute(0,true)
+	else:
+		AudioServer.set_bus_mute(0,false)
