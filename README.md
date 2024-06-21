@@ -8,9 +8,11 @@ You can use arrow keys (left stick) or WASD for movement.
 
 Space (A button in XBOX or equivalent) or W or Up Arrow for jump.
 
-R or M (B button for XBOX or equivalent) for menu.
+R (B button for XBOX or equivalent) for menu.
 
 Backspace (Menu button for XBOX or equivalent) for restarting game.
+
+M (X button for XBOX or equivalent) for muting game.
 
 # Source
 Made the ground by using this tutorial: https://youtu.be/LOhfqjmasi0?si=h_3O9HaNeL6ebevx    
