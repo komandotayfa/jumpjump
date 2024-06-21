@@ -4,6 +4,8 @@ You are a knight that likes to do frontflip and you are supposed to go right and
 **This is my first video game ever so it is very basic and somewhat trash but it is my trash!**
 
 ## Gameplay
+**This game requires keyboard or gamepad!**
+
 You can use arrow keys (left stick) or WASD for movement.
 
 Space (A button in XBOX or equivalent) or W or Up Arrow for jump.
