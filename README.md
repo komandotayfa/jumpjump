@@ -5,8 +5,11 @@ You are a knight that likes to do frontflip and you are supposed to go right.
 
 ## Gameplay
 You can use arrow keys (left stick) or WASD for movement.
+
 Space (A button in XBOX or equivalent) or W or Up Arrow for jump.
+
 R or M (B button for XBOX or equivalent) for menu.
+
 Backspace (Menu button for XBOX or equivalent) for restarting game.
 
 # Source
