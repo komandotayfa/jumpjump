@@ -1,5 +1,5 @@
 # About Game
-You are a knight that likes to do frontflip and you are supposed to go right.
+You are a knight that likes to do frontflip and you are supposed to go right and collect coins to reach END.
 
 **This is my first video game ever so it is very basic and somewhat trash but it is my trash!**
 
