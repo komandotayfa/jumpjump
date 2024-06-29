@@ -3,6 +3,12 @@ You are a knight that likes to do frontflip and you are supposed to go right and
 
 **This is my first video game ever so it is very basic and somewhat trash but it is my trash!**
 
+# Pictures
+file:///home/ktsy/Documents/GitHub/jumpjump/jumpjump_1.png
+file:///home/ktsy/Documents/GitHub/jumpjump/jumpjump_2.png
+file:///home/ktsy/Documents/GitHub/jumpjump/jumpjump_3.png
+file:///home/ktsy/Documents/GitHub/jumpjump/jumpjump_4.png
+
 ## Gameplay
 **This game requires keyboard or gamepad!**
 
